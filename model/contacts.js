@@ -1,26 +1,35 @@
-const Contact = require("./schemas/contacts");
+const Contact = require("./schemas/contact");
 
-const listContacts = async () => {
+const listContacts = async (userId) => {
   try {
-    const data = await Contact.find({});
+    const data = await Contact.find({ owner: userId }).populate({
+      path: "owner",
+      select: "email -_id",
+    });
     return data;
   } catch (error) {
     console.log(error.message);
   }
 };
 
-const getContactById = async (contactId) => {
+const getContactById = async (userId, contactId) => {
   try {
-    const data = await Contact.findOne({ _id: contactId });
+    const data = await Contact.findOne({
+      _id: contactId,
+      owner: userId,
+    }).populate({ path: "owner", select: "email -_id" });
     return data;
   } catch (error) {
     console.log(error.message);
   }
 };
 
-const removeContact = async (contactId) => {
+const removeContact = async (userId, contactId) => {
   try {
-    const data = await Contact.findByIdAndRemove({ _id: contactId });
+    const data = await Contact.findByIdAndRemove({
+      _id: contactId,
+      owner: userId,
+    });
     return data;
   } catch (error) {
     console.log(error.message);
@@ -36,10 +45,13 @@ const addContact = async (body) => {
   }
 };
 
-const updateContact = async (contactId, body) => {
+const updateContact = async (userId, contactId, body) => {
   try {
     const data = await Contact.findOneAndUpdate(
-      { _id: contactId },
+      {
+        _id: contactId,
+        owner: userId,
+      },
       { ...body },
       { new: true }
     );
