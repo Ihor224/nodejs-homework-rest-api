@@ -21,10 +21,15 @@ const getCurrentToken = async (token) => {
   return await User.findOne({ token });
 };
 
+const updateAvatar = async (id, avatarURL) => {
+  return await User.updateOne({ _id: id }, { avatarURL });
+};
+
 module.exports = {
   findById,
   findByEmail,
   create,
   updateToken,
   getCurrentToken,
+  updateAvatar,
 };
