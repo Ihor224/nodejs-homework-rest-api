@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
-const { Schema, SchemaTypes } = mongoose;
+const mongoose = require('mongoose')
+const { Schema, SchemaTypes } = mongoose
 
 const contactSchema = new Schema(
   {
     name: {
       type: String,
-      required: [true, "Set name for contact"],
+      required: [true, 'Set name for contact'],
     },
     email: {
       type: String,
@@ -19,7 +19,7 @@ const contactSchema = new Schema(
     },
     owner: {
       type: SchemaTypes.ObjectId,
-      ref: "user",
+      ref: 'user',
     },
   },
   {
@@ -28,21 +28,21 @@ const contactSchema = new Schema(
     toObject: {
       virtuals: true,
       transform: function (doc, ret) {
-        delete ret._id;
-        return ret;
+        delete ret._id
+        return ret
       },
     },
     toJSON: {
       virtuals: true,
       transform: function (doc, ret) {
-        delete ret._id;
-        delete ret.fullName;
-        return ret;
+        delete ret._id
+        delete ret.fullName
+        return ret
       },
     },
   }
-);
+)
 
-const Contact = mongoose.model("contact", contactSchema);
+const Contact = mongoose.model('contact', contactSchema)
 
-module.exports = Contact;
+module.exports = Contact

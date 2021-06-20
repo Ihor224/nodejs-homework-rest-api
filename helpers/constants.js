@@ -1,8 +1,8 @@
 const Subscription = {
-  STARTER: "starter",
-  PRO: "pro",
-  BUSINES: "business",
-};
+  STARTER: 'starter',
+  PRO: 'pro',
+  BUSINES: 'business',
+}
 
 const HttpCode = {
   OK: 200,
@@ -14,6 +14,6 @@ const HttpCode = {
   NOT_FOUND: 404,
   CONFLICT: 409,
   INTERNAL_SERVER_ERROR: 500,
-};
+}
 
-module.exports = { Subscription, HttpCode };
+module.exports = { Subscription, HttpCode }
